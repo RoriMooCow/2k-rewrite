@@ -1,0 +1,10 @@
+{
+  "token": "discord bot token",
+  "database": {
+    "host": "mysql host",
+    "port": "mysql port",
+    "username": "username",
+    "password": "password",
+    "dbname": "database name"
+  }
+}

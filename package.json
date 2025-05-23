@@ -1,0 +1,26 @@
+{
+  "name": "2k-community-bot",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/RoriMooCow/2k-community-bot#readme",
+  "bugs": {
+    "url": "https://github.com/RoriMooCow/2k-community-bot/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoriMooCow/2k-community-bot.git"
+  },
+  "license": "ISC",
+  "author": "RoriMooCow",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "glob": "^11.0.2",
+    "ms": "^2.1.3",
+    "mysql2": "^3.14.1"
+  }
+}
