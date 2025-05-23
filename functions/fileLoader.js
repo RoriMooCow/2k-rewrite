@@ -1,11 +1,14 @@
 /**
  * Utility functions for loading and clearing cached files (commands/events).
+ * This module helps dynamically load all .js files from a directory,
+ * and clears their require cache for hot-reloading.
  */
 
 const { glob } = require("glob");
 const path = require("path");
 
-// Delete a file from Node's require cache.
+// Deletes a file from Node's require cache.
+// This is necessary for hot-reloading commands/events.
 async function deleteCachedFile(file) {
   const filePath = path.resolve(file);
   if (require.cache[filePath]) {
@@ -14,7 +17,8 @@ async function deleteCachedFile(file) {
   }
 }
 
-// Load all .js files from a given directory, clearing their cache.
+// Loads all .js files from a given directory (recursively), clearing their cache.
+// Returns an array of resolved file paths.
 async function loadFiles(dirName) {
   if ((typeof dirName !== "string") | !dirName.trim()) {
     throw new Error("Invalid directory name provided.");

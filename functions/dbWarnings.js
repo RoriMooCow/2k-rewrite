@@ -1,10 +1,13 @@
 /**
  * Provides functions for managing user warnings in a MySQL database.
+ * This module allows you to add, retrieve, and remove warnings for users,
+ * supporting per-guild moderation tracking.
  */
 
 const db = require("./database.js");
 
-// Ensures the warnings table exists.
+// Ensures the warnings table exists in the database.
+// This table stores all warnings issued to users, including moderator, reason, and timestamp.
 async function ensureTable() {
   await db.query(`
     CREATE TABLE IF NOT EXISTS warnings (
@@ -18,7 +21,7 @@ async function ensureTable() {
   `);
 }
 
-// Adds a warning for a user.
+// Adds a warning for a user in a specific guild.
 async function addWarning(guildId, userId, moderatorId, reason, timestamp) {
   await ensureTable();
   await db.query(
@@ -27,7 +30,7 @@ async function addWarning(guildId, userId, moderatorId, reason, timestamp) {
   );
 }
 
-// Gets all warnings for a user in a guild.
+// Retrieves all warnings for a user in a specific guild, ordered by time.
 async function getWarnings(guildId, userId) {
   await ensureTable();
   const [rows] = await db.query(
@@ -38,7 +41,7 @@ async function getWarnings(guildId, userId) {
 }
 
 // Removes a warning by its index (1-based) for a user in a guild.
-// Returns the removed warning or null.
+// Returns the removed warning object, or null if not found.
 async function removeWarning(guildId, userId, index) {
   await ensureTable();
   const [rows] = await db.query(

@@ -1,10 +1,15 @@
 /**
  * Loads all event files and registers them with the Discord client.
+ * This enables dynamic, modular event loading and hot-reloading.
  */
 
 const { loadFiles } = require("../functions/fileLoader.js");
 
 // Loads and registers all events for the client.
+// - Loads all .js files from the Events directory.
+// - Clears their cache for hot-reloading.
+// - Adds each event to the client's event collection.
+// - Registers each event with the Discord client (once or on).
 async function loadEvents(client) {
   console.time("Events Loaded");
 
@@ -26,6 +31,7 @@ async function loadEvents(client) {
       })
     );
 
+    // Print a table of loaded events and their status
     console.table(events, ["Event", "Status"]);
   } catch (error) {
     console.error("Error loading events: ", error);

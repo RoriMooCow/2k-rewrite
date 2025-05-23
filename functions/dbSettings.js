@@ -1,10 +1,13 @@
 /**
  * Functions for managing per-guild settings in MySQL.
+ * This module provides helpers to set and get server-specific settings,
+ * such as the log channel for moderation events.
  */
 
 const db = require("./database.js");
 
-// Ensure the settings table exists
+// Ensures the guild_settings table exists in the database.
+// This table stores per-guild configuration, such as log channel IDs.
 async function ensureTable() {
   await db.query(`
     CREATE TABLE IF NOT EXISTS guild_settings (
@@ -14,7 +17,8 @@ async function ensureTable() {
   `);
 }
 
-// Set a log channel for a guild.
+// Sets the log channel for a specific guild.
+// If the guild already has a row, updates the log_channel_id.
 async function setLogChannel(guildId, channelId) {
   await ensureTable();
   await db.query(
@@ -26,8 +30,8 @@ async function setLogChannel(guildId, channelId) {
 }
 
 
-// Get settings for a guild.
-// Returns { log_channel_id } or null.
+// Retrieves all settings for a specific guild.
+// Returns an object with log_channel_id, or null if not set.
 async function getSettings(guildId) {
   await ensureTable();
   const [rows] = await db.query(
