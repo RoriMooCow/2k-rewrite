@@ -50,7 +50,10 @@ loadEvents(client);
 
 // Log in to Discord using the bot token from config.json.
 // If login fails, log the error and exit the process.
-client.login(client.config.token).catch((error) => {
+console.log("Attempting to log in with token:", client.config.token ? "[REDACTED]" : "MISSING");
+client.login(client.config.token).then(() => {
+  console.log("Login successful!");
+}).catch((error) => {
   console.error("Failed to login: ", error);
   process.exit(1);
 });
