@@ -16,7 +16,7 @@ async function loadCommands(client) {
 
   try {
     // Load all command files and clear their cache
-    const files = await loadFiles("Commands");
+    const files = await loadFiles("commands");
     const commands = await Promise.all(
       files.map(async (file) => {
         try {
