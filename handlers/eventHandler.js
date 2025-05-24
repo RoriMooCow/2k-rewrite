@@ -15,7 +15,7 @@ async function loadEvents(client) {
 
   try {
     // Load all event files and clear their cache
-    const files = await loadFiles("Events");
+    const files = await loadFiles("events");
     const events = await Promise.all(
       files.map(async (file) => {
         const event = require(file);
